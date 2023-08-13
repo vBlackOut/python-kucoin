@@ -799,7 +799,7 @@ class Client(object):
 
         return self._get('withdrawals/quotas', True, data=data)
 
-    def create_withdrawal(self, currency, amount, address, memo=None, is_inner=False, remark=None):
+    def create_withdrawal(self, currency, amount, address, memo=None, is_inner=False, remark=None, chain=None):
         """Process a withdrawal
 
         https://docs.kucoin.com/#apply-withdraw
@@ -836,7 +836,7 @@ class Client(object):
         data = {
             'currency': currency,
             'amount': amount,
-            'address': address
+            'address': address,
         }
 
         if memo:
@@ -845,6 +845,8 @@ class Client(object):
             data['isInner'] = is_inner
         if remark:
             data['remark'] = remark
+        if chain != None:
+            data['chain'] = chain
 
         return self._post('withdrawals', True, data=data)
 
